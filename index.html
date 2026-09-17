@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دستیار استایلیست من</title>
+<style>
+  :root{
+    --bg:#0f1220; --card:#1a1f35; --card2:#222947; --text:#eef0ff;
+    --muted:#9aa3c7; --accent:#8b7cf6; --accent2:#f6a6c1; --ok:#4ade80; --danger:#f87171;
+    --radius:16px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:Vazirmatn, Tahoma, sans-serif;
+    background:linear-gradient(160deg,#0f1220 0%,#171a2e 60%,#1b1430 100%);
+    color:var(--text); min-height:100vh; padding:24px 16px 60px;
+  }
+  .container{max-width:1000px; margin:0 auto;}
+  header{text-align:center; margin-bottom:28px;}
+  header h1{
+    font-size:1.9rem;
+    background:linear-gradient(90deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  header p{color:var(--muted); margin-top:8px; font-size:.95rem;}
+
+  .grid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  @media(max-width:800px){.grid{grid-template-columns:1fr;}}
+
+  .card{
+    background:var(--card); border:1px solid #2b3355;
+    border-radius:var(--radius); padding:20px;
+  }
+  .card h2{font-size:1.1rem; margin-bottom:14px; display:flex; align-items:center; gap:8px;}
+
+  label{display:block; font-size:.85rem; color:var(--muted); margin:10px 0 4px;}
+  input, select{
+    width:100%; padding:10px 12px; border-radius:10px;
+    border:1px solid #333c66; background:var(--card2); color:var(--text);
+    font-family:inherit; font-size:.95rem;
+  }
+  input:focus, select:focus{outline:2px solid var(--accent); border-color:transparent;}
+
+  .row{display:flex; gap:10px;}
+  .row > div{flex:1;}
+
+  button{
+    font-family:inherit; cursor:pointer; border:none; border-radius:10px;
+    padding:11px 18px; font-size:.95rem; transition:transform .15s, opacity .15s;
+  }
+  button:hover{transform:translateY(-2px);}
+  .btn-primary{background:linear-gradient(90deg,var(--accent),#6c5ce7); color:#fff; width:100%; margin-top:16px;}
+  .btn-magic{background:linear-gradient(90deg,var(--accent2),var(--accent)); color:#1a1030; font-weight:bold; width:100%; margin-top:16px;}
+  .btn-ghost{background:transparent; color:var(--muted); border:1px dashed #3a4470; width:100%; margin-top:10px; font-size:.85rem;}
+
+  .items{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;}
+  .chip{
+    background:var(--card2); border:1px solid #333c66; border-radius:999px;
+    padding:6px 12px; font-size:.85rem; display:flex; align-items:center; gap:8px;
+  }
+  .chip .dot{width:12px; height:12px; border-radius:50%; border:1px solid #ffffff44; display:inline-block;}
+  .chip button{background:none; color:var(--danger); padding:0 2px; font-size:1rem; line-height:1;}
+  .empty{color:var(--muted); font-size:.9rem; padding:14px 0; text-align:center;}
+
+  .outfit{
+    margin-top:16px; background:var(--card2); border-radius:12px; padding:16px;
+    border:1px solid #3a4470; animation:pop .3s ease;
+  }
+  @keyframes pop{from{opacity:0; transform:scale(.97);} to{opacity:1; transform:scale(1);}}
+  .outfit h3{font-size:1rem; color:var(--accent2); margin-bottom:10px;}
+  .outfit ul{list-style:none;}
+  .outfit li{
+    padding:8px 10px; margin-bottom:6px; background:#1a2040; border-radius:8px;
+    display:flex; align-items:center; gap:10px; font-size:.92rem;
+  }
+  .outfit li .dot{width:14px; height:14px; border-radius:50%; border:1px solid #ffffff44;}
+  .tip{margin-top:10px; font-size:.85rem; color:var(--ok);}
+  .warn{margin-top:10px; font-size:.85rem; color:var(--danger);}
+  .count{font-size:.8rem; color:var(--muted); background:var(--card2); padding:3px 10px; border-radius:999px;}
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>👗 دستیار استایلیست من</h1>
+    <p>کمدت رو ثبت کن، موقعیت رو بگو، استایلت آماده‌ست!</p>
+  </header>
+
+  <div class="grid">
+    <!-- افزودن آیتم -->
+    <div class="card">
+      <h2>➕ افزودن لباس به کمد</h2>
+      <label>نام آیتم</label>
+      <input id="name" placeholder="مثلاً: شلوار جین آبی">
+      <div class="row">
+        <div>
+          <label>دسته</label>
+          <select id="cat">
+            <option value="top">بالاتنه (تیشرت، پیراهن...)</option>
+            <option value="bottom">پایین‌تنه (شلوار، دامن...)</option>
+            <option value="outer">رولباسی (کت، ژاکت...)</option>
+            <option value="shoes">کفش</option>
+            <option value="accessory">اکسسوری</option>
+          </select>
+        </div>
+        <div>
+          <label>رنگ</label>
+          <input id="color" type="color" value="#4a6fa5" style="height:42px; padding:4px;">
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>سبک</label>
+          <select id="formality">
+            <option value="1">راحت / اسپرت</option>
+            <option value="2">نیمه‌رسمی</option>
+            <option value="3">رسمی</option>
+          </select>
+        </div>
+        <div>
+          <label>گرمای لباس</label>
+          <select id="warmth">
+            <option value="1">خنک (تابستانی)</option>
+            <option value="2">معمولی</option>
+            <option value="3">گرم (زمستانی)</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn-primary" onclick="addItem()">افزودن به کمد</button>
+      <button class="btn-ghost" onclick="loadSample()">🎲 پر کردن با داده‌ی نمونه (برای تست)</button>
+    </div>
+
+    <!-- پیشنهاد استایل -->
+    <div class="card">
+      <h2>✨ پیشنهاد استایل</h2>
+      <label>موقعیت</label>
+      <select id="occasion">
+        <option value="1">دورهمی دوستانه / روزمره</option>
+        <option value="2">دانشگاه / محل کار</option>
+        <option value="3">مهمانی رسمی / جلسه مهم</option>
+        <option value="sport">ورزش</option>
+      </select>
+      <label>وضعیت هوا</label>
+      <select id="weather">
+        <option value="1">گرم ☀️</option>
+        <option value="2" selected>معتدل 🌤️</option>
+        <option value="3">سرد ❄️</option>
+      </select>
+      <button class="btn-magic" onclick="suggest()">🪄 برام استایل بچین!</button>
+      <div id="result"></div>
+    </div>
+  </div>
+
+  <!-- کمد -->
+  <div class="card" style="margin-top:20px;">
+    <h2>🚪 کمد من <span class="count" id="count">0 آیتم</span></h2>
+    <div class="items" id="wardrobe"></div>
+  </div>
+</div>
+
+<script>
+const CATS = {top:'بالاتنه', bottom:'پایین‌تنه', outer:'رولباسی', shoes:'کفش', accessory:'اکسسوری'};
+let items = JSON.parse(localStorage.getItem('wardrobe') || '[]');
+
+function save(){ localStorage.setItem('wardrobe', JSON.stringify(items)); }
+
+function render(){
+  const box = document.getElementById('wardrobe');
+  document.getElementById('count').textContent = items.length + ' آیتم';
+  if(!items.length){ box.innerHTML = '<div class="empty">کمدت خالیه! اولین لباست رو اضافه کن 👆</div>'; return; }
+  box.innerHTML = items.map((it,i)=>`
+    <span class="chip">
+      <span class="dot" style="background:${it.color}"></span>
+      ${it.name} <small style="color:var(--muted)">(${CATS[it.cat]})</small>
+      <button onclick="removeItem(${i})" title="حذف">✕</button>
+    </span>`).join('');
+}
+
+function addItem(){
+  const name = document.getElementById('name').value.trim();
+  if(!name){ alert('نام آیتم را وارد کن!'); return; }
+  items.push({
+    name,
+    cat: document.getElementById('cat').value,
+    color: document.getElementById('color').value,
+    formality: +document.getElementById('formality').value,
+    warmth: +document.getElementById('warmth').value
+  });
+  save(); render();
+  document.getElementById('name').value = '';
+}
+
+function removeItem(i){ items.splice(i,1); save(); render(); }
+
+function loadSample(){
+  items = [
+    {name:'تیشرت سفید', cat:'top', color:'#f5f5f5', formality:1, warmth:1},
+    {name:'پیراهن آبی', cat:'top', color:'#3b6ea5', formality:2, warmth:2},
+    {name:'پیراهن مشکی رسمی', cat:'top', color:'#1a1a1a', formality:3, warmth:2},
+    {name:'شلوار جین', cat:'bottom', color:'#2f4b7c', formality:1, warmth:2},
+    {name:'شلوار پارچه‌ای مشکی', cat:'bottom', color:'#222222', formality:3, warmth:2},
+    {name:'شلوار ورزشی', cat:'bottom', color:'#555555', formality:1, warmth:1},
+    {name:'کت مشکی', cat:'outer', color:'#111111', formality:3, warmth:2},
+    {name:'هودی طوسی', cat:'outer', color:'#888888', formality:1, warmth:3},
+    {name:'کتونی سفید', cat:'shoes', color:'#eeeeee', formality:1, warmth:1},
+    {name:'کفش چرم مشکی', cat:'shoes', color:'#1a1a1a', formality:3, warmth:2},
+    {name:'ساعت چرمی', cat:'accessory', color:'#6b4a2b', formality:2, warmth:1},
+  ];
+  save(); render();
+}
+
+// امتیازدهی هر آیتم بر اساس شرایط
+function score(it, formality, weather){
+  let s = 10;
+  s -= Math.abs(it.formality - formality) * 4;   // تطابق سبک
+  s -= Math.abs(it.warmth - weather) * 3;         // تطابق هوا
+  s += Math.random() * 2;                          // تنوع در پیشنهادها
+  return s;
+}
+
+function pickBest(cat, formality, weather){
+  const pool = items.filter(it => it.cat === cat);
+  if(!pool.length) return null;
+  return pool.sort((a,b)=> score(b,formality,weather) - score(a,formality,weather))[0];
+}
+
+function suggest(){
+  const occ = document.getElementById('occasion').value;
+  const weather = +document.getElementById('weather').value;
+  const formality = occ === 'sport' ? 1 : +occ;
+  const res = document.getElementById('result');
+
+  if(!items.length){
+    res.innerHTML = '<div class="outfit"><span class="warn">اول چند آیتم به کمدت اضافه کن! 😊</span></div>';
+    return;
+  }
+
+  const outfit = [];
+  const missing = [];
+  const needed = ['top','bottom','shoes'];
+  if(weather === 3 || formality === 3) needed.push('outer'); // هوای سرد یا موقعیت رسمی
+
+  for(const cat of needed){
+    const it = pickBest(cat, formality, weather);
+    if(it) outfit.push(it); else missing.push(CATS[cat]);
+  }
+  const acc = pickBest('accessory', formality, weather);
+  if(acc && formality >= 2) outfit.push(acc);
+
+  let html = '<div class="outfit"><h3>👌 استایل پیشنهادی:</h3><ul>' +
+    outfit.map(it=>`<li><span class="dot" style="background:${it.color}"></span> ${it.name} <small style="color:var(--muted)">— ${CATS[it.cat]}</small></li>`).join('') +
+    '</ul>';
+
+  const tips = {
+    'sport': 'لباس راحت انتخاب شد؛ فراموش نکن آب همراهت ببری! 💧',
+    '1': 'استایل راحت و بی‌دردسر — خودت باش! 😎',
+    '2': 'ترکیبی مرتب و نیمه‌رسمی؛ مناسب محیط کار و دانشگاه.',
+    '3': 'شیک و رسمی؛ اعتماد به نفس یادت نره! 🕴️'
+  };
+  html += `<div class="tip">💡 ${tips[occ]}</div>`;
+  if(missing.length) html += `<div class="warn">⚠️ در کمدت «${missing.join('، ')}» پیدا نشد.</div>`;
+  html += '</div>';
+  res.innerHTML = html;
+}
+
+render();
+</script>
+</body>
+</html>
